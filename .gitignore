@@ -3,6 +3,7 @@
 [Ii]nclude
 [Ll]ib
 [Ll]ib64
+.idea
 [Ll]ocal
 [Ss]cripts
 pyvenv.cfg
