@@ -1,4 +1,4 @@
-Our project
+Our project v: 1.0.0
 
 Used technologies:
 
