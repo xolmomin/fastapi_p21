@@ -11,8 +11,11 @@ fastapi = "^0.115.0"
 uvicorn = "^0.31.0"
 jinja2 = "^3.1.4"
 sqladmin = "^0.19.0"
-sqlmodel = "^0.0.22"
 psycopg2-binary = "^2.9.9"
+python-dotenv = "^1.0.1"
+sqlalchemy-file = "^0.6.0"
+pillow = "^10.4.0"
+fastapi-storages = "^0.3.0"
 
 
 [build-system]

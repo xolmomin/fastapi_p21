@@ -4,12 +4,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from sqladmin import Admin
 
-from admin import ProductAdmin, CategoryAdmin
-from db import engine, init_db, destroy_db
-from models import Category, Product
-app = FastAPI()
+from apps.admin import ProductAdmin, CategoryAdmin
+from apps.models.db import db
 
-admin = Admin(app, engine)
+app = FastAPI()
+admin = Admin(app, db._engine)
 admin.add_view(ProductAdmin)
 admin.add_view(CategoryAdmin)
 
@@ -50,13 +49,13 @@ users = [
 
 @app.on_event("startup")
 def on_startup():
-    init_db()
+    db.create_all()
 
 
 @app.on_event("shutdown")
 def on_startup():
     pass
-    # destroy_db()
+    # db.drop_all()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -67,7 +66,6 @@ async def read_item(request: Request):
     return templates.TemplateResponse(request, 'user-list.html', context)
 
 
-# https://bootdey.com/
 @app.get("/users/{id}", response_class=HTMLResponse)
 async def read_item(request: Request, id: int):
     _user = None
