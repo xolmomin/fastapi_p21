@@ -27,8 +27,7 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     else:
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, conf.SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+    return jwt.encode(to_encode, conf.SECRET_KEY, algorithm=ALGORITHM)
 
 
 async def get_current_user(token):
@@ -53,7 +52,7 @@ class AuthBackend(AuthenticationBackend):
         if user is not None and user.is_superuser and user.is_active and (await user.check_password(password)):
             user_data = {
                 "id": user.id,
-                "username": user.username or None,
+                "username": user.username,
             }
             access_token = create_access_token(user_data)
             request.session.update({"token": access_token, "user": user_data})
