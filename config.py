@@ -24,13 +24,14 @@ class DatabaseConfig(BaseConfig):
 
     @property
     def db_url(self):
-        return f"postgresql+psycopg2://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
+        return f"postgresql+asyncpg://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
 
 
 @dataclass
 class Configuration:
     """All in one configuration's class"""
     db = DatabaseConfig()
+    SECRET_KEY: str = os.getenv('SECRET_KEY')
 
 
 conf = Configuration()

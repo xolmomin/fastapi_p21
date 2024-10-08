@@ -23,13 +23,20 @@ https://github.com/mjhea0/awesome-fastapi
 https://medium.com/@khalil.saidane/scalabel-fastapi-project-layered-architecture-10852a40fd38
 
 TASK
-
-1. adminkada product listda rasmini chiqadigan qilish kk -
+1.
 2. adminkada category listda product count ni chiqarish kk
-3. product slug
+3. product slug (python-slugify)
 4. adminka login page
 5. product va category CRUD
 6. product owner (user ga bog'lanadi)
 7. template uchun login qismi qilish
+8. session optimization (security)
 
 
+
+
+
+Teacherga task
+
+1. adminkada product listda rasmini chiqadigan qilish kk -
+2. id eng oxirgi column sifatida qoshilebdi
