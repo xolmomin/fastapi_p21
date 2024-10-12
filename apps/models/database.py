@@ -92,6 +92,9 @@ class BaseModel(Base, AbstractClass):
     __abstract__ = True
     id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
+    def __str__(self):
+        return f"{self.id}"
+
 
 class CreatedBaseModel(BaseModel):
     __abstract__ = True

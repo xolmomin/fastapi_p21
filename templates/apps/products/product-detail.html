@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head itemscope itemtype="http://schema.org/WebSite">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title itemprop="name">Preview bootstrap html snippet. shop product detail</title>
+    <meta name="description" itemprop="description"
+          content="Preview bootstrap html snippet. shop product detail. Copy and paste the html, css and js code for save time, build your app faster and responsive">
+    <meta name="keywords"
+          content="html, css, javascript, themes, templates, code snippets, ui examples, react js, react-native, plagraounds, cards, front-end, profile, invoice, back-end, web-designers, web-developers">
+    <link itemprop="sameAs" href="https://www.facebook.com/bootdey">
+    <link itemprop="sameAs" href="https://x.com/bootdey">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="viewport" content="width=device-width">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/bootdey_favicon.ico">
+    <link rel="apple-touch-icon" sizes="135x140" href="/img/bootdey_135x140.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/bootdey_76x76.png">
+    <link rel="canonical" href="https://bootdey.com/snippets/view/shop-product-detail" itemprop="url">
+    <meta property="x:account_id" content="2433978487"/>
+    <meta name="x:card" content="summary">
+    <meta name="x:card" content="summary_large_image">
+    <meta name="x:site" content="@bootdey">
+    <meta name="x:creator" content="@bootdey">
+    <meta name="x:title" content="Preview bootstrap html snippet. shop product detail">
+    <meta name="x:description"
+          content="Preview bootstrap html snippet. shop product detail. Copy and paste the html, css and js code for save time, build your app faster and responsive">
+    <meta name="x:image" content="https://bootdey.com/files/SnippetsImages/bootstrap-snippets-636.png">
+    <meta name="x:url" content="https://bootdey.com/snippets/preview/shop-product-detail">
+    <meta property="og:title" content="Preview bootstrap html snippet. shop product detail">
+    <meta property="og:url" content="https://bootdey.com/snippets/preview/shop-product-detail">
+    <meta property="og:image" content="https://bootdey.com/files/SnippetsImages/bootstrap-snippets-636.png">
+    <meta property="og:description"
+          content="Preview bootstrap html snippet. shop product detail. Copy and paste the html, css and js code for save time, build your app faster and responsive">
+    <meta name="msvalidate.01" content="23285BE3183727A550D31CAE95A790AB"/>
+    <script src="/cache-js/cache-1635427806-97135bbb13d92c11d6b2a92f6a36685a.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="snippetContent">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div class="container bootdey">
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="col-md-6">
+                        <div class="pro-img-details"><img src="https://www.bootdey.com/image/550x380/FFB6C1/000000" alt>
+                        </div>
+                        <div class="pro-img-list"><a href="#"> <img
+                                src="https://www.bootdey.com/image/115x100/87CEFA/000000" alt> </a> <a href="#"> <img
+                                src="https://www.bootdey.com/image/115x100/FF7F50/000000" alt> </a> <a href="#"> <img
+                                src="https://www.bootdey.com/image/115x100/20B2AA/000000" alt> </a> <a href="#"> <img
+                                src="https://www.bootdey.com/image/120x100/20B2AA/000000" alt> </a></div>
+                    </div>
+                    <div class="col-md-6"><h4 class="pro-d-title"><a href="#" class> {{ product.name }} </a></h4>
+                        <p> Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product
+                            descriptions address your ideal buyer directly and personally. The best product descriptions
+                            address your ideal buyer directly and personally.</p>
+                        <div class="product_meta">
+                            <span class="posted_in">
+                                <strong>Categories: </strong><a rel="tag" href="#">{{ product.category.name }}</a>
+                            </span>
+                        </div>
+                        <div class="m-bot15">
+                            <strong>Price : </strong>
+                            <span class="amount-old">$544</span>
+                            <span class="pro-price"> ${{ product.price }}</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="quantiy" placeholder="1" class="form-control quantity">
+                        </div>
+                        <p>
+                            <button class="btn btn-round btn-danger" type="button"><i class="fa fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            background: #eee;
+        }
+
+        /*panel*/
+        .panel {
+            border: none;
+            box-shadow: none;
+        }
+
+        .panel-heading {
+            border-color: #eff2f7;
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .panel-title {
+            color: #2A3542;
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 0;
+            margin-top: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /*product list*/
+
+        .prod-cat li a {
+            border-bottom: 1px dashed #d9d9d9;
+        }
+
+        .prod-cat li a {
+            color: #3b3b3b;
+        }
+
+        .prod-cat li ul {
+            margin-left: 30px;
+        }
+
+        .prod-cat li ul li a {
+            border-bottom: none;
+        }
+
+        .prod-cat li ul li a:hover, .prod-cat li ul li a:focus, .prod-cat li ul li.active a, .prod-cat li a:hover, .prod-cat li a:focus, .prod-cat li a.active {
+            background: none;
+            color: #ff7261;
+        }
+
+        .pro-lab {
+            margin-right: 20px;
+            font-weight: normal;
+        }
+
+        .pro-sort {
+            padding-right: 20px;
+            float: left;
+        }
+
+        .pro-page-list {
+            margin: 5px 0 0 0;
+        }
+
+        .product-list img {
+            width: 100%;
+            border-radius: 4px 4px 0 0;
+            -webkit-border-radius: 4px 4px 0 0;
+        }
+
+        .product-list .pro-img-box {
+            position: relative;
+        }
+
+        .adtocart {
+            background: #fc5959;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            color: #fff;
+            display: inline-block;
+            text-align: center;
+            border: 3px solid #fff;
+            left: 45%;
+            bottom: -25px;
+            position: absolute;
+        }
+
+        .adtocart i {
+            color: #fff;
+            font-size: 25px;
+            line-height: 42px;
+        }
+
+        .pro-title {
+            color: #5A5A5A;
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        .product-list .price {
+            color: #fc5959;
+            font-size: 15px;
+        }
+
+        .pro-img-details {
+            margin-left: -15px;
+        }
+
+        .pro-img-details img {
+            width: 100%;
+        }
+
+        .pro-d-title {
+            font-size: 16px;
+            margin-top: 0;
+        }
+
+        .product_meta {
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+            margin: 15px 0;
+        }
+
+        .product_meta span {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .product_meta a, .pro-price {
+            color: #fc5959;
+        }
+
+        .pro-price, .amount-old {
+            font-size: 18px;
+            padding: 0 10px;
+        }
+
+        .amount-old {
+            text-decoration: line-through;
+        }
+
+        .quantity {
+            width: 120px;
+        }
+
+        .pro-img-list {
+            margin: 10px 0 0 -15px;
+            width: 100%;
+            display: inline-block;
+        }
+
+        .pro-img-list a {
+            float: left;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .pro-d-head {
+            font-size: 18px;
+            font-weight: 300;
+        }
+    </style>
+    <script type="text/javascript"></script>
+</div>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-F1RTS0P1CD"></script>
+<script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-F1RTS0P1CD');
+</script>
+</body>
+</html>

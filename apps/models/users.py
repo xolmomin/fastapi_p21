@@ -1,6 +1,6 @@
 import bcrypt
 from sqlalchemy import String, Boolean, select
-from sqlalchemy.orm import mapped_column, Mapped
+from sqlalchemy.orm import mapped_column, Mapped, relationship
 from starlette.authentication import BaseUser
 
 from apps.models.database import BaseModel, db
@@ -13,6 +13,10 @@ class User(BaseModel, BaseUser):
     password: Mapped[str] = mapped_column(String(255))
     is_active: Mapped[bool] = mapped_column(Boolean, server_default="False")
     is_superuser: Mapped[bool] = mapped_column(Boolean, server_default="False")
+    products: Mapped[list['Product']] = relationship('Product', back_populates='owner')
+
+    def __str__(self):
+        return super().__str__() + f" - {self.username}"
 
     @classmethod
     async def get_user_by_username(cls, username):
