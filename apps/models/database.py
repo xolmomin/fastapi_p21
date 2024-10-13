@@ -84,7 +84,11 @@ class AbstractClass:
         await cls.commit()
 
     @classmethod
-    async def get_all(cls):
+    async def filter(cls, criteria):
+        return (await db.execute(select(cls).where(criteria))).scalars()
+
+    @classmethod
+    async def all(cls):
         return (await db.execute(select(cls))).scalars()
 
 

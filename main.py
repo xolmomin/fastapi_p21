@@ -1,9 +1,10 @@
 import os
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.staticfiles import StaticFiles
 from sqladmin import Admin
+from starlette import status
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import FileResponse
 
@@ -24,7 +25,7 @@ admin.add_view(CategoryAdmin)
 async def get_media(full_path):
     image_path = Path(f'media/{full_path}')
     if not image_path.is_file():
-        return {"error": "Image not found on the server"}
+        return Response("Image not found on the server", status.HTTP_404_NOT_FOUND)
     return FileResponse(image_path)
 
 

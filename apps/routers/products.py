@@ -16,10 +16,10 @@ product_router = APIRouter()
 
 @product_router.get("/", name='product_list')
 async def get_all_products(request: Request, category: int = None):
-    if category is None:
-        products = await Product.get_all()
+    if category:
+        products = await Product.filter(Product.category_id == category)
     else:
-        products = await Product.get_products_by_category_id(category)
+        products = await Product.all()
     context = {
         'products': products
     }
