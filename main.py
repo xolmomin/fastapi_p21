@@ -1,7 +1,10 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from sqladmin import Admin
 from starlette.middleware.sessions import SessionMiddleware
+from starlette.responses import FileResponse
 
 from apps.admin import ProductAdmin, CategoryAdmin
 from apps.models import db
@@ -16,6 +19,14 @@ admin.add_view(ProductAdmin)
 admin.add_view(CategoryAdmin)
 
 app.mount("/static", StaticFiles(directory='static'), name='static')
+
+
+@app.get("/media/{full_path:path}", name='media')
+async def get_media(full_path):
+    image_path = Path(f'media/{full_path}')
+    if not image_path.is_file():
+        return {"error": "Image not found on the server"}
+    return FileResponse(image_path)
 
 
 @app.on_event("startup")

@@ -47,10 +47,16 @@
                 <div class="col-md-3">
                     <div class="ibox">
                         <div class="ibox-content product-box">
-                            <div class="product-imitation"> [ INFO ]</div>
+                            <div class="product-imitation" style="padding: 0;">
+                                <img src="{{ request.base_url }}{{ product.photo }}" alt="rasm" width="225" height="220">
+                            </div>
                             <div class="product-desc">
                                 <span class="product-price"> ${{ product.price }} </span>
-                                <small class="text-muted">{{ product.category.name }}</small>
+                                <small class="text-muted">
+                                    <a href="{{ url_for('product_list') }}?category={{ product.category.id }}">
+                                        {{ product.category.name }}
+                                    </a>
+                                </small>
                                 <a href="{{ url_for('product_detail', slug=product.slug) }}" class="product-name"> {{ product.name }}</a>
                                 <div class="small m-t-xs"> Many desktop publishing packages and web page editors now.
                                 </div>

@@ -25,15 +25,17 @@ https://medium.com/@khalil.saidane/scalabel-fastapi-project-layered-architecture
 TASK
 1.
 2. adminkada category listda product count ni chiqarish kk
-3. product slug (python-slugify) +
-4. adminka login page            +
-5. product va category CRUD      +
-6. product owner (user ga bog'lanadi) +
+3. ✅ product slug (python-slugify)
+4. ✅ adminka login page
+5. product va category CRUD
+6. product owner (user ga bog'lanadi)
 6.1 product price va product discount price (constraint bilan tekshirish kk price dan kichik bolishini)
 6.2 adminkadan user product qo'shsa (productni owneri shu user bolishi kk avtomatik olsin)
+6.3 product image larini products/images nomli papkaga saqlashi kk
+6.4 product image ni ko'p image qilish
 7. template uchun login qismi qilish
 8. session optimization (security)
-
+9.
 
 
 
