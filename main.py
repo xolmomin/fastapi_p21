@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -18,8 +19,6 @@ admin = Admin(app, db._engine, authentication_backend=AuthBackend(conf.SECRET_KE
 admin.add_view(ProductAdmin)
 admin.add_view(CategoryAdmin)
 
-app.mount("/static", StaticFiles(directory='static'), name='static')
-
 
 @app.get("/media/{full_path:path}", name='media')
 async def get_media(full_path):
@@ -31,6 +30,9 @@ async def get_media(full_path):
 
 @app.on_event("startup")
 async def on_startup():
+    if not os.path.exists('static'):
+        os.mkdir('static')
+    app.mount("/static", StaticFiles(directory='static'), name='static')
     app.include_router(product_router)
     await db.create_all()
 

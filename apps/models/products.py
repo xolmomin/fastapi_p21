@@ -22,7 +22,7 @@ class Category(CreatedBaseModel):
 class Product(CreatedBaseModel):
     name: Mapped[str] = mapped_column(VARCHAR(255))
     slug: Mapped[str] = mapped_column(String(255), unique=True)
-    photo: Mapped[ImageField] = mapped_column(FileType(storage=storage))
+    photo: Mapped[ImageField] = mapped_column(FileType(storage=storage('products/%Y/%m/%d')))
     price: Mapped[str] = mapped_column(VARCHAR(255), nullable=True)
     category_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(Category.id, ondelete='CASCADE'))
     category: Mapped['Category'] = relationship('Category', lazy='selectin', back_populates='products')

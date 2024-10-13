@@ -1,6 +1,5 @@
 from fastapi import APIRouter
 from starlette.requests import Request
-from starlette.responses import RedirectResponse
 
 from apps.models import Product
 from config import templates
@@ -28,7 +27,7 @@ async def get_all_products(request: Request, category: int = None):
 
 
 @product_router.get("/detail/{slug}", name='product_detail')
-async def get_all_products(request: Request, slug: str):
+async def get_product(request: Request, slug: str):
     product = await Product.get_by_slug(slug)
     context = {
         'product': product

@@ -31,8 +31,9 @@ TASK
 6. product owner (user ga bog'lanadi)
 6.1 product price va product discount price (constraint bilan tekshirish kk price dan kichik bolishini)
 6.2 adminkadan user product qo'shsa (productni owneri shu user bolishi kk avtomatik olsin)
-6.3 product image larini products/images nomli papkaga saqlashi kk
+6.3 product image larini products/images nomli papkaga saqlashi kk ✅
 6.4 product image ni ko'p image qilish
+6.5 user ga image qoshish kk
 7. template uchun login qismi qilish
 8. session optimization (security)
 9.
@@ -40,6 +41,6 @@ TASK
 
 
 Teacherga task
-
+0. get_products_by_category_id va get_by_slug universal yechim
 1. adminkada product listda rasmini chiqadigan qilish kk -
 2. id eng oxirgi column sifatida qoshilebdi
