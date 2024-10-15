@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import BigInteger, delete as sqlalchemy_delete, DateTime, update as sqlalchemy_update
+from sqlalchemy import BigInteger, delete as sqlalchemy_delete, DateTime, update as sqlalchemy_update, func
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncAttrs
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.future import select
@@ -75,6 +75,11 @@ class AbstractClass:
     @classmethod
     async def get(cls, id_):
         query = select(cls).where(cls.id == id_)
+        return (await db.execute(query)).scalar()
+
+    @classmethod
+    async def count(cls):
+        query = select(func.count()).select_from(cls)
         return (await db.execute(query)).scalar()
 
     @classmethod

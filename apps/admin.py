@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 
 from slugify import slugify
 from sqladmin import ModelView
@@ -11,7 +11,17 @@ class ProductAdmin(ModelView, model=Product):
     # column_list = [Product.id, Product.name, Product.photo]
     column_list = ['id', 'name']
     # column_details_exclude_list = ['created_at', 'updated_at']
-    form_excluded_columns = ['created_at', 'updated_at', 'slug']
+    # form_excluded_columns = ['created_at', 'updated_at', 'slug', 'owner']
+    form_columns = [
+        'category',
+        'name',
+        'photo',
+        'discount_price',
+        'price',
+        'quantity',
+    ]
+    name_plural = 'Mahsulotlar'
+    name = 'Mahsulot'
 
     async def insert_model(self, request: Request, data: dict) -> Any:
         data['slug'] = slugify(data['name'])
@@ -20,10 +30,19 @@ class ProductAdmin(ModelView, model=Product):
 
 
 class CategoryAdmin(ModelView, model=Category):
-    column_list = ['id', 'name']
+    column_list = ['id', 'name', 'parent_id']
     column_details_list = ['id', 'name']
     form_rules = [
         "name",
+        "parent"
     ]
-
     can_export = False
+    name_plural = 'Kategoriyalar'
+    name = 'Kategoriya'
+
+
+    # def get_list_columns(self) -> List[str]:
+    #     return super().get_list_columns()
+
+    # async def after_model_create(self, obj: Category):
+    #     obj.product_count123 = await obj.product_count()

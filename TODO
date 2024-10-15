@@ -23,12 +23,12 @@ https://github.com/mjhea0/awesome-fastapi
 https://medium.com/@khalil.saidane/scalabel-fastapi-project-layered-architecture-10852a40fd38
 
 TASK
-1. modellar yozish (user, product, product_image, category, )
+1. modellar yozish (user, product, product_image, category, cart, wishlist)
 2. adminkada category listda product count ni chiqarish kk
 3. ✅ product slug (python-slugify)
 4. ✅ adminka login page
 5. product va category CRUD
-6. product owner (user ga bog'lanadi)
+6. ✅ product owner (user ga bog'lanadi)
 6.1 ✅ product price va product discount price (constraint bilan tekshirish kk price dan kichik bolishini)
 6.2 ✅ adminkadan user product qo'shsa (productni owneri shu user bolishi kk avtomatik olsin)
 6.3 ✅ product image larini products/images nomli papkaga saqlashi kk
@@ -36,10 +36,16 @@ TASK
 6.5 user ga image qoshish kk
 6.6 product narxini 3talik qilib chiqarish
 6.7 category ni ichma ich qilish kerak
+6.8 modellarni adminkada field ozbekcha chiqsin
+6.9 adminkada categoryni parentini --- chiziq bilan chiqarish django mptt ga oxshatib
 7. template uchun login qismi qilish
 8. session optimization (security)
 9.
 10. uzs, dollar
+11. malumotlarni faker orqali toldirish (har bir modeldan ntadan)
+
+
+
 
 product list
 https://bootdey.com/snippets/view/Shop-product-list
