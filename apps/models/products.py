@@ -1,6 +1,6 @@
 from fastapi_storages.integrations.sqlalchemy import FileType
 from slugify import slugify
-from sqlalchemy import BigInteger, String, VARCHAR, ForeignKey, select, Integer
+from sqlalchemy import BigInteger, String, VARCHAR, ForeignKey, select, Integer, CheckConstraint
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy_file import ImageField
 
@@ -20,11 +20,16 @@ class Product(CreatedBaseModel):
     name: Mapped[str] = mapped_column(VARCHAR(255))
     slug: Mapped[str] = mapped_column(String(255), unique=True)
     photo: Mapped[ImageField] = mapped_column(FileType(storage=storage('products/%Y/%m/%d')))
-    price: Mapped[int] = mapped_column(Integer, nullable=True)
+    discount_price: Mapped[int] = mapped_column(Integer, nullable=True)
+    # quantity: Mapped[int] = mapped_column(Integer, server_default="0")
+    price: Mapped[int] = mapped_column(Integer)
     category_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(Category.id, ondelete='CASCADE'))
     category: Mapped['Category'] = relationship('Category', lazy='selectin', back_populates='products')
     owner_id: Mapped[int] = mapped_column(BigInteger, ForeignKey('users.id', ondelete='CASCADE'))
     owner: Mapped['User'] = relationship('User', lazy='selectin', back_populates='products')
+    __table_args__ = (
+        CheckConstraint('price > discount_price'),
+    )
 
     @classmethod
     async def get_by_slug(cls, slug: str):

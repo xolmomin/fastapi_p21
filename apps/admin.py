@@ -15,6 +15,7 @@ class ProductAdmin(ModelView, model=Product):
 
     async def insert_model(self, request: Request, data: dict) -> Any:
         data['slug'] = slugify(data['name'])
+        data['owner_id'] = request.session['user']['id']
         return await super().insert_model(request, data)
 
 

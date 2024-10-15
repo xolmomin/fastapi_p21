@@ -63,9 +63,14 @@
                         </div>
                         <div class="m-bot15">
                             <strong>Price : </strong>
-                            <span class="amount-old">$544</span>
-                            <span class="pro-price"> ${{ product.price }}</span>
+                            {% if product.discount_price %}
+                                <span class="amount-old">{{ product.price|format }} UZS</span>
+                                <span class="pro-price">{{ product.discount_price }} UZS</span>
+                            {% else %}
+                                <span class="pro-price">{{ product.price }} UZS</span>
+                            {% endif %}
                         </div>
+
 
                         <div class="form-group">
                             <label>Quantity</label>
