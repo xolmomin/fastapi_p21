@@ -24,7 +24,7 @@ https://medium.com/@khalil.saidane/scalabel-fastapi-project-layered-architecture
 
 TASK
 1. modellar yozish (user, product, product_image, category, cart, wishlist)
-2. adminkada category listda product count ni chiqarish kk
+2. category ga tegishli bolgan productlarni chiqarish (product list da)
 3. ✅ product slug (python-slugify)
 4. ✅ adminka login page
 5. product va category CRUD
@@ -32,14 +32,19 @@ TASK
 6.1 ✅ product price va product discount price (constraint bilan tekshirish kk price dan kichik bolishini)
 6.2 ✅ adminkadan user product qo'shsa (productni owneri shu user bolishi kk avtomatik olsin)
 6.3 ✅ product image larini products/images nomli papkaga saqlashi kk
-6.4 product image ni ko'p image qilish
-6.5 user ga image qoshish kk
+6.4 ✅ product image ni ko'p image qilish
+6.5 ✅ user ga image qoshish kk
 6.6 product narxini 3talik qilib chiqarish
-6.7 category ni ichma ich qilish kerak
+6.7 ✅ category ni ichma ich qilish kerak
 6.8 modellarni adminkada field ozbekcha chiqsin
-6.9 adminkada categoryni parentini --- chiziq bilan chiqarish django mptt ga oxshatib
-7. template uchun login qismi qilish
-8. session optimization (security)
+6.9 ✅ adminkada categoryni parentini -> chiziq bilan chiqarish django mptt ga oxshatib
+7. product listda category ni bosgandan keyin category ga tegishli product larni chiqarish
+(belgilangan category qizil bob turishi kk active bolib)
+7.1 product detailda product image larini chiqarish
+7.2 like va cart ga qoshadigan qilish
+7.3
+8.template uchun login qismi qilish
+8.1 session optimization (security)
 9.
 10. uzs, dollar
 11. malumotlarni faker orqali toldirish (har bir modeldan ntadan)
@@ -70,7 +75,7 @@ extra task:
 2. auto completed in admin
 3. list_display da image chiqishi in admin
 4. id eng oxirgi column sifatida qoshilebdi
-
+5. adminkada category listda product count ni chiqarish kk
 
 admin
 123

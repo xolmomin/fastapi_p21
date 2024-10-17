@@ -1,10 +1,11 @@
+import asyncio
 from datetime import datetime
 
 from sqlalchemy import BigInteger, delete as sqlalchemy_delete, DateTime, update as sqlalchemy_update, func
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, AsyncAttrs
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.future import select
-from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.orm import sessionmaker, DeclarativeBase, Mapped, mapped_column, selectinload
 
 from config import conf
 
@@ -13,7 +14,13 @@ class Base(AsyncAttrs, DeclarativeBase):
 
     @declared_attr
     def __tablename__(self) -> str:
-        __name = self.__name__.lower()
+        __name = self.__name__[:1]
+        for i in self.__name__[1:]:
+            if i.isupper():
+                __name += '_'
+            __name += i
+        __name = __name.lower()
+
         if __name.endswith('y'):
             __name = __name[:-1] + 'ie'
         return __name + 's'
@@ -73,8 +80,8 @@ class AbstractClass:
         await cls.commit()
 
     @classmethod
-    async def get(cls, id_):
-        query = select(cls).where(cls.id == id_)
+    async def get(cls, criteria):
+        query = select(cls).where(criteria)
         return (await db.execute(query)).scalar()
 
     @classmethod
@@ -89,12 +96,18 @@ class AbstractClass:
         await cls.commit()
 
     @classmethod
-    async def filter(cls, criteria):
-        return (await db.execute(select(cls).where(criteria))).scalars()
+    async def filter(cls, criteria, *, relationship):
+        query = select(cls).where(criteria)
+        if relationship:
+            query = query.options(selectinload(relationship))
+        return (await db.execute(query)).scalars()
 
     @classmethod
     async def all(cls):
         return (await db.execute(select(cls))).scalars()
+
+    # def run_async(self, func, *args, **kwargs):
+    #     return asyncio.run(func(*args, **kwargs))
 
 
 class BaseModel(Base, AbstractClass):

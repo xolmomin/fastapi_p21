@@ -28,7 +28,7 @@ async def get_all_products(request: Request, category: int = None):
 
 @product_router.get("/detail/{slug}", name='product_detail')
 async def get_product(request: Request, slug: str):
-    product = await Product.get_by_slug(slug)
+    product = await Product.get(Product.slug == slug)
     context = {
         'product': product
     }

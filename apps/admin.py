@@ -30,7 +30,7 @@ class ProductAdmin(ModelView, model=Product):
 
 
 class CategoryAdmin(ModelView, model=Category):
-    column_list = ['id', 'name', 'parent_id']
+    column_list = ['id', 'name']
     column_details_list = ['id', 'name']
     form_rules = [
         "name",
@@ -39,10 +39,3 @@ class CategoryAdmin(ModelView, model=Category):
     can_export = False
     name_plural = 'Kategoriyalar'
     name = 'Kategoriya'
-
-
-    # def get_list_columns(self) -> List[str]:
-    #     return super().get_list_columns()
-
-    # async def after_model_create(self, obj: Category):
-    #     obj.product_count123 = await obj.product_count()
