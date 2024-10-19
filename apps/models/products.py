@@ -1,4 +1,4 @@
-from fastapi_storages.integrations.sqlalchemy import FileType
+from fastapi_storages.integrations.sqlalchemy import FileType, ImageType
 from slugify import slugify
 from sqlalchemy import BigInteger, String, VARCHAR, ForeignKey, Integer, CheckConstraint
 from sqlalchemy.orm import mapped_column, Mapped, relationship
@@ -69,4 +69,4 @@ class Product(CreatedBaseModel):
 class ProductPhoto(CreatedBaseModel):
     product_id: Mapped[int] = mapped_column(BigInteger, ForeignKey('products.id', ondelete='CASCADE'))
     product: Mapped['Product'] = relationship('Product', lazy='selectin', back_populates='photos')
-    photo: Mapped[ImageField] = mapped_column(FileType(storage=storage('products/%Y/%m/%d')))
+    photo: Mapped[ImageField] = mapped_column(ImageType(storage=storage('products/%Y/%m/%d')))

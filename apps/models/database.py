@@ -35,7 +35,7 @@ class AsyncDatabaseSession:
 
     def init(self):
         self._engine = create_async_engine(conf.db.db_url)
-        self._session = sessionmaker(self._engine, expire_on_commit=False, class_=AsyncSession)()
+        self._session = sessionmaker(self._engine, class_=AsyncSession)()
 
     async def create_all(self):
         async with self._engine.begin() as conn:
@@ -107,11 +107,11 @@ class AbstractClass:
 
         if relationship:
             query = query.options(selectinload(relationship))
-        return (await db.execute(query)).scalars()
+        return (await db.execute(query)).scalars().all()
 
     @classmethod
     async def all(cls):
-        return (await db.execute(select(cls))).scalars()
+        return (await db.execute(select(cls))).scalars().all()
 
     # def run_async(self, func, *args, **kwargs):
     #     return asyncio.run(func(*args, **kwargs))

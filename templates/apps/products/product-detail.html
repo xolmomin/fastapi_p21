@@ -44,21 +44,30 @@
             <section class="panel">
                 <div class="panel-body">
                     <div class="col-md-6">
-                        <div class="pro-img-details"><img src="https://www.bootdey.com/image/550x380/FFB6C1/000000" alt>
+                        <div class="pro-img-details">
+                            <img src="{{ request.base_url }}{{ product.photos[0].photo }}" width="550px;"
+                                 height="380px;">
                         </div>
-                        <div class="pro-img-list"><a href="#"> <img
-                                src="https://www.bootdey.com/image/115x100/87CEFA/000000" alt> </a> <a href="#"> <img
-                                src="https://www.bootdey.com/image/115x100/FF7F50/000000" alt> </a> <a href="#"> <img
-                                src="https://www.bootdey.com/image/115x100/20B2AA/000000" alt> </a> <a href="#"> <img
-                                src="https://www.bootdey.com/image/120x100/20B2AA/000000" alt> </a></div>
+                        <div class="pro-img-list">
+
+                            {% for photo in product.photos[1:] %}
+                                <a href="">
+                                    <img src="{{ request.base_url }}{{ photo.photo }}" width="115px;" height="100px;">
+                                </a>
+                            {% endfor %}
+
+                            <a href="#">
+                                <img src="https://www.bootdey.com/image/115x100/FF7F50/000000" hidden> </a> <a href="#">
+                            <img src="https://www.bootdey.com/image/120x100/20B2AA/000000" hidden> </a></div>
                     </div>
                     <div class="col-md-6"><h4 class="pro-d-title"><a href="#" class> {{ product.name }} </a></h4>
-                        <p> Praesent ac condimentum felis. Nulla at nisl orci, at dignissim dolor, The best product
-                            descriptions address your ideal buyer directly and personally. The best product descriptions
-                            address your ideal buyer directly and personally.</p>
+                        <p> {{ product.description }}</p>
                         <div class="product_meta">
                             <span class="posted_in">
-                                <strong>Categories: </strong><a rel="tag" href="#">{{ product.category.name }}</a>
+                                <strong>Category: </strong>
+                                <a rel="tag" href="{{ url_for('product_list') }}?category={{ product.category_id }}">
+                                    {{ product.category.name }}
+                                </a>
                             </span>
                         </div>
                         <div class="m-bot15">

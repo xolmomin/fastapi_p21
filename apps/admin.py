@@ -5,6 +5,7 @@ from sqladmin import ModelView
 from starlette.requests import Request
 
 from apps.models import Product, Category
+from apps.models.products import ProductPhoto
 
 
 class ProductAdmin(ModelView, model=Product):
@@ -15,7 +16,6 @@ class ProductAdmin(ModelView, model=Product):
     form_columns = [
         'category',
         'name',
-        'photo',
         'discount_price',
         'price',
         'quantity',
@@ -39,3 +39,14 @@ class CategoryAdmin(ModelView, model=Category):
     can_export = False
     name_plural = 'Kategoriyalar'
     name = 'Kategoriya'
+
+
+class ProductPhotoAdmin(ModelView, model=ProductPhoto):
+    # column_list = ['id', 'name']
+    column_details_list = ['id', 'name']
+    # form_rules = [
+    #     "name",
+    #     "parent"
+    # ]
+    form_excluded_columns = ['created_at', 'updated_at']
+    can_export = False

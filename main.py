@@ -9,7 +9,7 @@ from starlette import status
 from starlette.middleware.sessions import SessionMiddleware
 from starlette.responses import FileResponse
 
-from apps.admin import ProductAdmin, CategoryAdmin
+from apps.admin import ProductAdmin, CategoryAdmin, ProductPhotoAdmin
 from apps.models import db
 from apps.routers import product_router
 from apps.utils.authentication import AuthBackend
@@ -32,6 +32,7 @@ app.add_middleware(SessionMiddleware, secret_key=conf.SECRET_KEY)
 admin = Admin(app, db._engine, authentication_backend=AuthBackend(conf.SECRET_KEY))
 admin.add_view(ProductAdmin)
 admin.add_view(CategoryAdmin)
+admin.add_view(ProductPhotoAdmin)
 
 
 @app.get("/media/{full_path:path}", name='media')

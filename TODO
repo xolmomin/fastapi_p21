@@ -51,6 +51,10 @@ TASK
 
 task
 1. image larni togrilash
+2. image ni database ga mediadan keyingilarini saqlaydigan qilish
+3. register, login page larni togrilash
+4. pagination
+
 
 
 
