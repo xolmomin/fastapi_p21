@@ -42,6 +42,7 @@ class Category(CreatedBaseModel):
 class Product(CreatedBaseModel):
     name: Mapped[str] = mapped_column(VARCHAR(255))
     slug: Mapped[str] = mapped_column(String(255), unique=True)
+    description: Mapped[str] = mapped_column(String(255), nullable=True)
     discount_price: Mapped[int] = mapped_column(Integer, nullable=True)
     price: Mapped[int] = mapped_column(Integer)
     quantity: Mapped[int] = mapped_column(Integer, server_default="0")

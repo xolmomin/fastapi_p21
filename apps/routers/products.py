@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from starlette.requests import Request
 
-from apps.models import Product
+from apps.models import Product, Category
 from config import templates
 
 product_router = APIRouter()
@@ -17,11 +17,14 @@ product_router = APIRouter()
 @product_router.get("/", name='product_list')
 async def get_all_products(request: Request, category: int = None):
     if category:
+        # _categories = await Category.filter(Category.parent_id == category)
         products = await Product.filter(Product.category_id == category)
     else:
         products = await Product.all()
+    categories = await Category.filter(Category.parent_id == None, relationship=Category.subcategories)
     context = {
-        'products': products
+        'products': products,
+        'categories': categories
     }
     return templates.TemplateResponse(request, 'apps/products/product-list.html', context)
 

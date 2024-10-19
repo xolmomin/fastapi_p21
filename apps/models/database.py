@@ -1,4 +1,3 @@
-import asyncio
 from datetime import datetime
 
 from sqlalchemy import BigInteger, delete as sqlalchemy_delete, DateTime, update as sqlalchemy_update, func
@@ -80,8 +79,10 @@ class AbstractClass:
         await cls.commit()
 
     @classmethod
-    async def get(cls, criteria):
+    async def get(cls, criteria, *, relationship=None):
         query = select(cls).where(criteria)
+        if relationship:
+            query = query.options(selectinload(relationship))
         return (await db.execute(query)).scalar()
 
     @classmethod
@@ -96,8 +97,14 @@ class AbstractClass:
         await cls.commit()
 
     @classmethod
-    async def filter(cls, criteria, *, relationship):
-        query = select(cls).where(criteria)
+    async def filter(cls, criteria, *, relationship=None, columns=None):
+        if columns:
+            query = select(*columns)
+        else:
+            query = select(cls)
+
+        query = query.where(criteria)
+
         if relationship:
             query = query.options(selectinload(relationship))
         return (await db.execute(query)).scalars()

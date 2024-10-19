@@ -49,23 +49,21 @@
                 <header class="panel-heading"> Category</header>
                 <div class="panel-body">
                     <ul class="nav prod-cat">
-                        <li><a href="#" class="active"><i class="fa fa-angle-right"></i> Dress</a>
-                            <ul class="nav">
-                                <li class="active"><a href="#">- Shirt</a></li>
-                                <li><a href="#">- Pant</a></li>
-                                <li><a href="#">- Shoes</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Bags &amp; Purses</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Beauty</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Coat &amp; Jacket</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Jeans</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Jewellery</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Electronics</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Sports</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Technology</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Watches</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i> Accessories</a></li>
+                        {% for category in categories %}
+                            <li>
+                                <a href="{{ url_for('product_list') }}?category={{ category.id }}">
+                                    <i class="fa fa-angle-right"></i> {{ category.name }}
+                                </a>
+                                <ul class="nav">
+                                    {% for subcategory in category.subcategories %}
+                                        <li>
+                                            <a {% if subcategory.id == request.query_params.get('category', '0')|int %}class="active"{% endif %} href="{{ url_for('product_list') }}?category={{ subcategory.id }}">- {{ subcategory.name }}</a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+
                     </ul>
                 </div>
             </section>
@@ -81,13 +79,15 @@
                                     <a href="#cart" class="adtocart" style="position: absolute; top: 10px; left: 10px;">
                                         <i class="fa fa-shopping-cart"></i>
                                     </a>
-                                    <a href="#like" class="like-icon" style="position: absolute; top: 10px; right: 10px;">
+                                    <a href="#like" class="like-icon"
+                                       style="position: absolute; top: 10px; right: 10px;">
                                         <i class="fa fa-heart"></i>
                                     </a>
                                 </div>
                                 <div class="panel-body text-center">
                                     <h4>
-                                        <a href="{{ url_for('product_detail', slug=product.slug) }}" class="pro-title"> {{ product.name }} </a>
+                                        <a href="{{ url_for('product_detail', slug=product.slug) }}"
+                                           class="pro-title"> {{ product.name }} </a>
                                     </h4>
                                     {% if product.discount_price %}
                                         <span class="amount-old">{{ product.price|format }} UZS</span>
