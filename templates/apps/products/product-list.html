@@ -93,7 +93,7 @@
                                         <span class="amount-old">{{ product.price|format }} UZS</span>
                                         <p class="price">{{ product.discount_price }} UZS</p>
                                     {% else %}
-                                        <p class="price">{{ product.price }} UZS</p>
+                                        <p class="price">{{ product.price_uzs }} UZS</p>
                                     {% endif %}
 
                                     <a href="{{ url_for('product_detail', slug=product.slug) }}">

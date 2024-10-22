@@ -11,7 +11,7 @@ from starlette.responses import FileResponse
 
 from apps.admin import ProductAdmin, CategoryAdmin, ProductPhotoAdmin
 from apps.models import db
-from apps.routers import product_router
+from apps.routers import product_router, generate_router
 from apps.utils.authentication import AuthBackend
 from config import conf
 
@@ -22,6 +22,7 @@ async def lifespan(app: FastAPI):
         os.mkdir('static')
     app.mount("/static", StaticFiles(directory='static'), name='static')
     app.include_router(product_router)
+    app.include_router(generate_router)
     await db.create_all()
 
     yield

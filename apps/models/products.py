@@ -1,6 +1,8 @@
-from fastapi_storages.integrations.sqlalchemy import FileType, ImageType
+from enum import Enum
+
+from fastapi_storages.integrations.sqlalchemy import ImageType
 from slugify import slugify
-from sqlalchemy import BigInteger, String, VARCHAR, ForeignKey, Integer, CheckConstraint
+from sqlalchemy import BigInteger, Enum as SqlEnum, String, VARCHAR, ForeignKey, Integer, CheckConstraint
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy_file import ImageField
 
@@ -20,6 +22,14 @@ class Category(CreatedBaseModel):
         if self.parent is None:
             return self.name
         return f"{self.parent} -> {self.name}"
+
+    @classmethod
+    async def generate(cls, count: int = 1):
+        f = await super().generate(count)
+        for _ in range(count):
+            await cls.create(
+                name=f.company()
+            )
     #
     # async def async_product_count(self):
     #     query = select(func.count()).select_from(Product).filter(Product.category_id == self.id)
@@ -40,11 +50,15 @@ class Category(CreatedBaseModel):
 
 
 class Product(CreatedBaseModel):
+    class Currency(str, Enum):
+        UZS = 'uzs'
+        USD = 'usd'
     name: Mapped[str] = mapped_column(VARCHAR(255))
     slug: Mapped[str] = mapped_column(String(255), unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True)
     discount_price: Mapped[int] = mapped_column(Integer, nullable=True)
     price: Mapped[int] = mapped_column(Integer)
+    currency: Mapped[str] = mapped_column(SqlEnum(Currency), nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, server_default="0")
     category_id: Mapped[int] = mapped_column(BigInteger, ForeignKey(Category.id, ondelete='CASCADE'))
     category: Mapped['Category'] = relationship('Category', lazy='selectin', back_populates='products')
@@ -56,6 +70,10 @@ class Product(CreatedBaseModel):
     __table_args__ = (
         CheckConstraint('price > discount_price'),
     )
+
+    @property
+    def price_uzs(self):
+        return self.price * 12500
 
     @classmethod
     async def create(cls, **kwargs):

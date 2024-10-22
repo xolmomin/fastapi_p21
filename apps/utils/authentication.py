@@ -38,7 +38,7 @@ async def get_current_user(token):
             raise credentials_exception
     except InvalidTokenError:
         raise credentials_exception
-    user = await User.get_user_by_username(username)
+    user = await User.get(User.username == username)
     if user is None:
         raise credentials_exception
     return user
@@ -48,7 +48,7 @@ class AuthBackend(AuthenticationBackend):
     async def login(self, request: Request) -> bool:
         form = await request.form()
         username, password = form["username"], form["password"]
-        user = await User.get_user_by_username(username)
+        user = await User.get(User.username == username)
         if user is not None and user.is_superuser and user.is_active and (await user.check_password(password)):
             user_data = {
                 "id": user.id,
