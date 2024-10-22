@@ -58,7 +58,8 @@ task
 (first_name, email, username, password, confirm_password) -> pochtaga yuborish
 6. login
 (username, password)
-
+6.1 background task (pochta yuborishni shu orqali qilish)
+6.2 celery bilan pochtaga yuborish
 
 
 

@@ -30,7 +30,8 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     return jwt.encode(to_encode, conf.SECRET_KEY, algorithm=ALGORITHM)
 
 
-async def get_current_user(token):
+async def get_current_user(request: Request) -> Union[User, None]:
+    token = request.session.get("token")
     try:
         payload = jwt.decode(token, conf.SECRET_KEY, algorithms=[ALGORITHM])
         username: dict = payload.get("username")
@@ -65,9 +66,8 @@ class AuthBackend(AuthenticationBackend):
         return True
 
     async def authenticate(self, request: Request):
-        token = request.session.get("token")
         try:
-            user = await get_current_user(token)
+            user = await get_current_user(request)
         except Exception as e:
             return False
         return user, True
