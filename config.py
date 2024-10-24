@@ -28,11 +28,21 @@ class DatabaseConfig(BaseConfig):
     def db_url(self):
         return f"postgresql+asyncpg://{self.USER}:{self.PASS}@{self.HOST}:{self.PORT}/{self.NAME}"
 
+class SMTPConfig(BaseConfig):
+    """Database connection variables"""
+    EMAIL_HOST = os.getenv('EMAIL_HOST')
+    EMAIL_PORT = os.getenv('EMAIL_PORT')
+    EMAIL_USE_TLS = True
+    EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+
+# 10.10.1.243:8000/send-email/botir@mail.ru
 
 @dataclass
 class Configuration:
     """All in one configuration's class"""
     db = DatabaseConfig()
+    smtp = SMTPConfig()
     SECRET_KEY: str = os.getenv('SECRET_KEY')
 
 
