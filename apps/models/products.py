@@ -1,5 +1,6 @@
 from enum import Enum
 
+from fastapi_storages import FileSystemStorage
 from fastapi_storages.integrations.sqlalchemy import ImageType
 from slugify import slugify
 from sqlalchemy import BigInteger, Enum as SqlEnum, String, VARCHAR, ForeignKey, Integer, CheckConstraint
@@ -7,7 +8,6 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy_file import ImageField
 
 from apps.models.database import CreatedBaseModel
-from config import storage
 
 
 class Category(CreatedBaseModel):
@@ -53,6 +53,7 @@ class Product(CreatedBaseModel):
     class Currency(str, Enum):
         UZS = 'uzs'
         USD = 'usd'
+
     name: Mapped[str] = mapped_column(VARCHAR(255))
     slug: Mapped[str] = mapped_column(String(255), unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True)
@@ -87,4 +88,4 @@ class Product(CreatedBaseModel):
 class ProductPhoto(CreatedBaseModel):
     product_id: Mapped[int] = mapped_column(BigInteger, ForeignKey('products.id', ondelete='CASCADE'))
     product: Mapped['Product'] = relationship('Product', lazy='selectin', back_populates='photos')
-    photo: Mapped[ImageField] = mapped_column(ImageType(storage=storage('products/%Y/%m/%d')))
+    photo: Mapped[ImageField] = mapped_column(ImageType(storage=FileSystemStorage('media/products/')))

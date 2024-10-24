@@ -1,6 +1,6 @@
 import os
 from dataclasses import dataclass, asdict
-from datetime import datetime
+from pathlib import Path
 
 from dotenv import load_dotenv
 from fastapi.templating import Jinja2Templates
@@ -36,13 +36,17 @@ class Configuration:
     SECRET_KEY: str = os.getenv('SECRET_KEY')
 
 
-class CustomFileSystemStorage(FileSystemStorage):
-
-    def __init__(self, path: str) -> None:
-        date = datetime.today()
-        super().__init__(os.path.join('media', date.strftime(path)))
-
+# class CustomFileSystemStorage(FileSystemStorage):
+#
+#     def __init__(self, path: str) -> None:
+#         self.MEDIA_URL = 'media'
+#         self._path = path
+#         Path(self.MEDIA_URL).mkdir(parents=True, exist_ok=True)
+#
+#     def get_path(self, name: str) -> str:
+#         return str(self._path / Path(name))
+#
 
 conf = Configuration()
-storage = CustomFileSystemStorage
+# storage = CustomFileSystemStorage
 templates = Jinja2Templates(directory='templates')
