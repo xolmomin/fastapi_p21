@@ -1,10 +1,10 @@
 import os
 from dataclasses import dataclass, asdict
-from pathlib import Path
+from typing import Optional
 
+import requests
 from dotenv import load_dotenv
 from fastapi.templating import Jinja2Templates
-from fastapi_storages import FileSystemStorage
 
 load_dotenv()
 
@@ -46,6 +46,18 @@ class Configuration:
 #     def get_path(self, name: str) -> str:
 #         return str(self._path / Path(name))
 #
+
+
+def get_currency_in_sum() -> tuple[Optional[int], bool]:
+    url = "https://cbu.uz/oz/arkhiv-kursov-valyut/json/"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        for currency in data:
+            if currency['Ccy'] == 'USD':
+                return int(float(currency['Rate'])), True
+    return None, False
+
 
 conf = Configuration()
 # storage = CustomFileSystemStorage

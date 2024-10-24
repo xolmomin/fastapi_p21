@@ -1,4 +1,5 @@
 from datetime import datetime
+from venv import create
 
 from faker import Faker
 from sqlalchemy import BigInteger, delete as sqlalchemy_delete, DateTime, update as sqlalchemy_update, func
@@ -112,20 +113,20 @@ class AbstractClass:
 
         if relationship:
             query = query.options(selectinload(relationship))
-        return (await db.execute(query)).scalars().all()
+        return (await db.execute(query)).scalars()
 
     @classmethod
     async def all(cls):
-        return (await db.execute(select(cls))).scalars().all()
+        return (await db.execute(select(cls))).scalars()
 
     # def run_async(self, func, *args, **kwargs):
     #     return asyncio.run(func(*args, **kwargs))
 
-    def convert_uzs(self, amount: int):
-        return amount * current_price
-
-    def convert_usd(self, amount: int):
-        return amount // current_price
+    # def convert_uzs(self, amount: int):
+    #     return amount * current_price
+    #
+    # def convert_usd(self, amount: int):
+    #     return amount // current_price
 
 
 class BaseModel(Base, AbstractClass):

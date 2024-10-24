@@ -43,7 +43,10 @@
     <div class="container bootdey">
         <div class="col-md-3">
             <section class="panel">
-                <div class="panel-body"><input type="text" placeholder="Keyword Search" class="form-control"/></div>
+                <form action="{{ url_for('product_list') }}" method="get">
+
+                    <div class="panel-body"><input type="text" placeholder="Keyword Search" name="search" class="form-control"/></div>
+                </form>
             </section>
             <section class="panel">
                 <header class="panel-heading"> Category</header>
@@ -94,6 +97,7 @@
                                         <p class="price">{{ product.discount_price }} UZS</p>
                                     {% else %}
                                         <p class="price">{{ product.price_uzs }} UZS</p>
+                                        <p class="price">{{ product.price }} USD</p>
                                     {% endif %}
 
                                     <a href="{{ url_for('product_detail', slug=product.slug) }}">

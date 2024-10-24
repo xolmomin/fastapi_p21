@@ -8,6 +8,7 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from sqlalchemy_file import ImageField
 
 from apps.models.database import CreatedBaseModel
+from config import get_currency_in_sum
 
 
 class Category(CreatedBaseModel):
@@ -74,7 +75,8 @@ class Product(CreatedBaseModel):
 
     @property
     def price_uzs(self):
-        return self.price * 12500
+        sum_price, _ = get_currency_in_sum()
+        return self.price * sum_price
 
     @classmethod
     async def create(cls, **kwargs):
