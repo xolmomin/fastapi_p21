@@ -40,7 +40,7 @@ TASK
 6.9 ✅ adminkada categoryni parentini -> chiziq bilan chiqarish django mptt ga oxshatib
 7. product listda category ni bosgandan keyin category ga tegishli product larni chiqarish
 (belgilangan category qizil bob turishi kk active bolib)
-7.1 product detailda product image larini chiqarish
+7.1 ✅ product detailda product image larini chiqarish
 7.2 like va cart ga qoshadigan qilish
 7.3
 8.template uchun login qismi qilish
@@ -58,8 +58,10 @@ task
 (first_name, email, username, password, confirm_password) -> pochtaga yuborish
 6. login
 (username, password)
-6.1 background task (pochta yuborishni shu orqali qilish)
+6.1✅  background task (pochta yuborishni shu orqali qilish)
+
 6.2 celery bilan pochtaga yuborish
+6.8 modellarni adminkada field ozbekcha chiqsin
 
 
 

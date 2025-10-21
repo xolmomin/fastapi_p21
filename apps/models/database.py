@@ -103,30 +103,59 @@ class AbstractClass:
         await cls.commit()
 
     @classmethod
-    async def filter(cls, criteria, *, relationship=None, columns=None):
+    async def filter(
+            cls,
+            *criteria,
+            relationship=None,
+            columns=None,
+            use_or=False,
+            **filters,
+    ):
+        """
+        #
+        # # 1️⃣ Oddiy filter (AND)
+        # users = await User.filter(name="Ali", age=25)
+        #
+        # # 2️⃣ Bitta criterion bilan
+        # users = await User.filter(User.email.like('%@gmail.com'))
+        #
+        # # 3️⃣ Bir nechta criterion OR bilan
+        # users = await User.filter(User.age < 18, User.role == "student", use_or=True)
+        #
+        # # 4️⃣ Faqat ma’lum ustunlarni tanlash
+        # names = await User.filter(age=25, columns=[User.name])
+        #
+        # # 5️⃣ Relationshipni preload qilish
+        # users = await User.filter(User.is_active == True, relationship="profile")
+
+        Universal filter for flexible querying.
+        Examples:
+            await User.filter(name="Ali", age=20)
+            await User.filter(User.age > 18, User.name.like('%a%'))
+            await User.filter(User.role.in_(['admin', 'editor']), use_or=True)
+        """
         if columns:
             query = select(*columns)
         else:
             query = select(cls)
 
-        query = query.where(criteria)
+        # Add dynamic filters (**kwargs)
+        if filters:
+            dynamic_filters = [getattr(cls, k) == v for k, v in filters.items()]
+            criteria = (*criteria, *dynamic_filters)
+
+        if criteria:
+            query = query.where(or_(*criteria) if use_or else and_(*criteria))
 
         if relationship:
             query = query.options(selectinload(relationship))
-        return (await db.execute(query)).scalars()
+
+        result = await db.execute(query)
+        return result.scalars().all()
 
     @classmethod
     async def all(cls):
         return (await db.execute(select(cls))).scalars()
-
-    # def run_async(self, func, *args, **kwargs):
-    #     return asyncio.run(func(*args, **kwargs))
-
-    # def convert_uzs(self, amount: int):
-    #     return amount * current_price
-    #
-    # def convert_usd(self, amount: int):
-    #     return amount // current_price
 
 
 class BaseModel(Base, AbstractClass):
